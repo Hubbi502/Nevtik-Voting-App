@@ -2,6 +2,7 @@ import { loginSchema, registerSchema } from "../validation/userSchema.js";
 import { request, response } from "express";
 import { verifyToken } from "../libs/jwt.js";
 import prisma from "../utils/prisma.js";
+import { requireClerkAuth } from "./clerk.middleware.js";
 
 export const isLoginValid = async (req = request, res = response, next)=>{
   const {email, password} = req.body;
@@ -61,31 +62,28 @@ export const isRegisterValid = async (req = request, res = response, next)=>{
     next();
 }
 
-export const isAuthorized = async (req = request, res = response, next)=>{
-  try{
-    const token = req.cookies.token;
-    if (!token) {
-      return res.status(401).json({
-          message: "Unauthorized",
-      });
-    }
-    const decoded = verifyToken(token);
-    if (!decoded) {
-        return res.status(401).json({
-            message: "Unauthorized",
-        });
-    }
-    if(decoded.userId.role !== 'ADMIN'){
-      return res.status(401).json({
-        message: "Unauthorized",
-    });
-    }
-    req.user = decoded.userId;
-    next();
-  }catch(error){
-    console.log(error);
-    return res.status(401).json({
-        message: "Unauthorized",
-    });
+export const isAuthorized = async (req, res, next) => {
+  const authStrategy = req.authStrategy;
+
+  //switch case untuk menentukan authStrategy jwt atau clerk
+  switch (authStrategy) {
+    case 'clerk':
+      return requireClerkAuth(req, res, next);
+    
+    case 'jwt':
+    default:
+      const token = req.cookies.token;
+      if (!token) {
+        return res.status(401).json({ message: "No token provided" });
+      }
+
+      const decoded = verifyToken(token);
+      if (!decoded) {
+        return res.status(401).json({ message: "Invalid token" });
+      }
+
+      req.user = decoded;
+      next();
+      break;
   }
-}
+};

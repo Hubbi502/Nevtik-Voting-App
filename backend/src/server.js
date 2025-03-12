@@ -1,8 +1,6 @@
 // src/index.js
 import express from "express";
-import userRoutes from "./routes/auth.router.js"; 
-import candidatesRouter from "./routes/candidates.router.js";
-import voteRouter from "./routes/vote.router.js";
+import router from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
 
@@ -12,16 +10,8 @@ const app = express();
 
 app.use(express.json()); 
 app.use(cookieParser());
+app.use("/", router);
 
-app.use((req, res, next) => {
-  const authStrategy = req.headers['x-auth-strategy'] || 'jwt';
-  req.authStrategy = authStrategy;
-  next();
-});
-
-app.use("/auth", userRoutes);
-app.use("/candidates", candidatesRouter);
-app.use("/vote", voteRouter);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

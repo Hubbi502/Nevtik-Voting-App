@@ -82,6 +82,10 @@ export const isAuthorized = async (req, res, next) => {
         return res.status(401).json({ message: "Invalid token" });
       }
 
+      if (decoded.userId.role !== "ADMIN"){
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+
       req.user = decoded;
       next();
       break;

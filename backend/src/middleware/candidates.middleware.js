@@ -15,11 +15,7 @@ export const isCandidateValid = async (req = request, res = response, next)=>{
   const isDataValid = await addCandidatesSchema.safeParseAsync({
     name:name, 
     vision:vision, 
-    mission:mission,
-    divisi:divisi,
-    kelas:kelas,
-    jurusan:jurusan,
-    proker:proker
+    mission:mission
   });
   if(!isDataValid.success){
     return res.status(400).json({

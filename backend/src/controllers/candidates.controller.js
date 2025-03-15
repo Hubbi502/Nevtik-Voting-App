@@ -18,7 +18,7 @@ export const getCandidates = async (req = request, res = response) => {
 }
 
 export const createCandidates = async (req = request, res = response)=>{
-  const {name, vision, mission, divisi, kelas, jurusan, proker} = req.body;
+  const {name, vision, mission, divisi, kelas, jurusan} = req.body;
   try{
     const candidate = await prisma.candidate.create({
       data:{
@@ -27,8 +27,7 @@ export const createCandidates = async (req = request, res = response)=>{
         mission:mission,
         divisi: divisi,
         kelas: kelas,
-        jurusan: jurusan,
-        proker: proker
+        jurusan: jurusan
       }
     });
     res.status(201).json({

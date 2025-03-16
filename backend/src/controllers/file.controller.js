@@ -1,13 +1,15 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { request, response } from 'express';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import fs from 'fs';
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
 
 export const serveImage = (req = request, res = response) => {
-  const filePath = path.join(__dirname, '../../uploads', req.params.filename);
+  const filePath = path.join(__dirname, '../../uploads/img', req.params.filename);
 
   // Cek apakah file ada
   if (!fs.existsSync(filePath)) {

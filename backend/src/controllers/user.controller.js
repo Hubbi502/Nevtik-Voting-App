@@ -2,6 +2,14 @@ import prisma from "../utils/prisma.js";
 import { request, response } from "express";
 import { hash, compare } from "bcrypt";
 import { createToken } from "../libs/jwt.js";
+import path from 'path';
+import fs from 'fs/promises';
+import { fileURLToPath } from 'url';
+import { parseCsv } from "../utils/csv-parser.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
 export const login = async (req = request, res = response)=>{
     const {email, password} = req.body;
@@ -46,11 +54,11 @@ export const login = async (req = request, res = response)=>{
 }
 
 export const register = async (req = request, res = response)=>{
-  const {name, password, email, divisi} = req.body;
+  const {name, password, email, divisi, role} = req.body;
 
   // hash password
-  const hashedPassword = await hash(password, 10);
-
+  const hashedPassword = await hash(password, 12);
+ 
   // menambahkan user
   try{
     const user = await prisma.user.create({
@@ -58,7 +66,8 @@ export const register = async (req = request, res = response)=>{
         email:email,
         name:name,
         password:hashedPassword,
-        divisi: divisi
+        divisi: divisi,
+        role:role
       }
     });
     res.status(201).json({
@@ -125,4 +134,28 @@ export const logoutUser = async (req = request, res = response) => {
   res.status(200).json({
     message: "Logout successful",
   });
+};
+
+export const readCSV = async (req = request, res = response) => {
+  const filePath = __dirname + "/../../uploads/data/" + req.params.filename;
+  try {
+    await fs.access(filePath); 
+    const results = await parseCsv(filePath);
+    for (const user of results){
+      const { email, name, password, divisi, role } = user;
+      const hashedPassword = await hash(password, 12);
+      await prisma.user.create({
+        data: {
+          email:email,
+          name:name,
+          password:hashedPassword,
+          divisi: divisi,
+          role:role
+        }
+      });
+    }
+    res.status(201).json({ message: "Users added successfully"});
+  } catch (error) {
+    res.status(500).json({ message: "Error reading CSV file", error: error.message });
+  }
 };

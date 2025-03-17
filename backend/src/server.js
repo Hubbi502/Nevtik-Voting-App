@@ -3,9 +3,19 @@ import express from "express";
 import router from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import dotenv from 'dotenv';
-import cors from 'cors'
+import cors from 'cors';
+import fs from 'fs';
+import path from 'path';
 
 dotenv.config();
+
+// Create upload directories
+const uploadDirs = ['uploads/img', 'uploads/data'];
+uploadDirs.forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+});
 
 const app = express();
 

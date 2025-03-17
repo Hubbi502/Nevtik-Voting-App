@@ -1,12 +1,11 @@
 import { request, response } from 'express';
-
+import prisma from "../utils/prisma.js";
 import fs from 'fs';
-
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-export const __filename = fileURLToPath(import.meta.url);
-export const __dirname = path.dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const serveImage = (req = request, res = response) => {
   const filePath = path.join(__dirname, '../../uploads/img', req.params.filename);
@@ -35,3 +34,43 @@ export const listFiles = (req = request, res = response) => {
     res.json(fileList);
   })
 }
+
+export const uploadImage = async (req = request, res = response) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  const { id } = req.params;
+  const imageUrl = `/candidates/img/${req.file.filename}`;
+
+  try {
+    const updatedCandidate = await prisma.candidate.update({
+      where: { id },
+      data: { image: imageUrl }
+    });
+
+    res.status(200).json({
+      message: "Image uploaded successfully",
+      data: {
+        id: updatedCandidate.id,
+        image: updatedCandidate.image
+      }
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error updating candidate image",
+      error: error.message
+    });
+  }
+};
+
+export const uploadCSV = async (req = request, res = response) => {
+  if (!req.file) {
+    return res.status(400).json({ message: "No file uploaded" });
+  }
+
+  res.status(200).json({
+    message: "CSV file uploaded successfully",
+    filename: req.file.filename
+  });
+};

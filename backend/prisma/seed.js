@@ -57,8 +57,8 @@ async function main() {
         ]),
         divisi: 'Web Development',
         kelas: 'XI',
-        jurusan: 'RPL',
-        image: null
+        jurusan: 'RPL'
+        // Remove image field completely to use schema default
       }
     }),
     prisma.candidate.create({
@@ -74,8 +74,8 @@ async function main() {
         ]),
         divisi: 'Cyber Security',
         kelas: 'XI',
-        jurusan: 'RPL',
-        image: null
+        jurusan: 'RPL'
+        // Remove image field completely to use schema default
       }
     })
   ]);

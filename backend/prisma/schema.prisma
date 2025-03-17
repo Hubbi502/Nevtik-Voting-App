@@ -26,14 +26,14 @@ model User {
 }
 
 model Candidate {
-  id        String   @id @default(cuid())
+  id        String   @id @default(uuid())
   name      String
-  vision    Json
-  mission   Json
+  vision    String   @db.Text
+  mission   String   @db.Text
   divisi    String   
-  kelas  String
-  jurusan String
-  image     String   @default("")
+  kelas     String
+  jurusan   String
+  image     String?  // Make image optional with ?
   votes     Vote[]  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

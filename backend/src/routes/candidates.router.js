@@ -10,7 +10,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 export const __dirname = path.dirname(__filename);
 
-const router = Router();
+export const router = Router();
 
 // Existing routes
 router.get("/", getCandidates);
@@ -22,7 +22,6 @@ router.get("/votes/winner", isAuthorized, getWinner);
 
 // File routes
 router.post("/upload/image/:id", isAuthorized, upload.single('image'), uploadImage);
-router.post("/upload/csv", isAuthorized, upload.single('csv'), uploadCSV);
 router.get("/img/:filename", serveImage);
 router.get("/img/list", listFiles);
 

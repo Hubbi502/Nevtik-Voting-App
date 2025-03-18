@@ -136,26 +136,3 @@ export const logoutUser = async (req = request, res = response) => {
   });
 };
 
-export const readCSV = async (req = request, res = response) => {
-  const filePath = __dirname + "/../../uploads/data/" + req.params.filename;
-  try {
-    await fs.access(filePath); 
-    const results = await parseCsv(filePath);
-    for (const user of results){
-      const { email, name, password, divisi, role } = user;
-      const hashedPassword = await hash(password, 12);
-      await prisma.user.create({
-        data: {
-          email:email,
-          name:name,
-          password:hashedPassword,
-          divisi: divisi,
-          role:role
-        }
-      });
-    }
-    res.status(201).json({ message: "Users added successfully"});
-  } catch (error) {
-    res.status(500).json({ message: "Error reading CSV file", error: error.message });
-  }
-};

@@ -2,7 +2,7 @@ import { Router } from "express";
 import { login, register, getUsers, getSpecificUser, logoutUser } from "../controllers/user.controller.js";
 import { isLoginValid, isRegisterValid, isAuthorized, isDataValid} from "../middleware/auth.middleware.js";
 import { readCSV, uploadCSV } from "../controllers/file.controller.js";
-import { router } from "./candidates.router.js";
+import { upload } from "../utils/multer.js";
 
 
 const router = Router();

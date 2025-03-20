@@ -89,7 +89,8 @@ export const getUsers = async (req = request, res = response) => {
       select: {
         id: true,
         email: true,
-        name: true
+        name: true,
+        divisi: true
       }
     });
 

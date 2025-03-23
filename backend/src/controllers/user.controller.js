@@ -85,7 +85,13 @@ export const register = async (req = request, res = response)=>{
 
 export const getUsers = async (req = request, res = response) => {
   try {
-    const users = await prisma.user.findMany({
+    const page = parseInt(req.query.page);
+    const limit = 6;
+    const skip = (page - 1) * limit;
+
+    let users;
+    if(!page || page < 1){
+    users = await prisma.user.findMany({
       select: {
         id: true,
         email: true,
@@ -93,6 +99,19 @@ export const getUsers = async (req = request, res = response) => {
         divisi: true
       }
     });
+  }else{
+    users = await prisma.user.findMany({
+      skip: skip,
+      take: limit,
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        divisi: true
+      }
+    });
+
+  }
 
     res.status(200).json({
       message: "success",

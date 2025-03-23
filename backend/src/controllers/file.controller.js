@@ -3,6 +3,8 @@ import prisma from "../utils/prisma.js";
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { parseCsv } from '../utils/csv-parser.js';
+import { hash } from 'bcrypt';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -67,7 +69,7 @@ export const uploadImage = async (req = request, res = response) => {
 export const readCSV = async (req = request, res = response) => {
   const filePath = __dirname + "/../../uploads/data/" + req.params.filename;
   try {
-    fs.access(filePath); 
+    await fs.promises.access(filePath); 
     const results = await parseCsv(filePath);
     for (const user of results){
       const { email, name, password, divisi, role } = user;

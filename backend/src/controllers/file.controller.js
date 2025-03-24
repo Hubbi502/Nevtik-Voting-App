@@ -12,7 +12,6 @@ const __dirname = path.dirname(__filename);
 export const serveImage = (req = request, res = response) => {
   const filePath = path.join(__dirname, '../../uploads/img', req.params.filename);
 
-  // Cek apakah file ada
   if (!fs.existsSync(filePath)) {
     return res.status(404).json({ error: "File not found" });
   }
@@ -67,26 +66,71 @@ export const uploadImage = async (req = request, res = response) => {
 };
 
 export const readCSV = async (req = request, res = response) => {
-  const filePath = __dirname + "/../../uploads/data/" + req.params.filename;
+  const filePath = path.join(__dirname, '../../uploads/data', req.params.filename);
+
   try {
-    await fs.promises.access(filePath); 
-    const results = await parseCsv(filePath);
-    for (const user of results){
-      const { email, name, password, divisi, role } = user;
-      const hashedPassword = await hash(password, 12);
-      await prisma.user.create({
-        data: {
-          email:email,
-          name:name,
-          password:hashedPassword,
-          divisi: divisi,
-          role:role
+    const users = await parseCsv(filePath);
+    const stats = { total: users.length, successful: 0, skipped: [] };
+
+    const existingEmails = new Set(
+      (await prisma.user.findMany({ select: { email: true } }))
+        .map(user => user.email.toLowerCase())
+    );
+
+    for (const user of users) {
+      try {
+        if (existingEmails.has(user.email.toLowerCase())) {
+          stats.skipped.push({
+            name: user.name,
+            email: user.email,
+            reason: 'Email already exists'
+          });
+          continue;
         }
-      });
+
+        const hashedPassword = await hash(user.password || 'defaultPass123', 10);
+        await prisma.user.create({
+          data: {
+            name: user.name,
+            email: user.email,
+            password: hashedPassword,
+            divisi: user.divisi || 'General',
+            role: user.role || 'USER'
+          }
+        });
+
+        existingEmails.add(user.email.toLowerCase());
+        stats.successful++;
+
+      } catch (error) {
+        stats.skipped.push({
+          name: user.name,
+          email: user.email,
+          reason: error.message
+        });
+      }
+
+      if ((stats.successful + stats.skipped.length) % 50 === 0) {
+        console.log(`Processed ${stats.successful + stats.skipped.length}/${stats.total} users`);
+      }
     }
-    res.status(201).json({ message: "Users added successfully"});
+
+    return res.status(200).json({
+      message: "CSV processing completed",
+      summary: {
+        total: stats.total,
+        successful: stats.successful,
+        skipped: stats.skipped.length
+      },
+      skipped: stats.skipped
+    });
+
   } catch (error) {
-    res.status(500).json({ message: "Error reading CSV file", error: error.message });
+    console.error('CSV processing error:', error);
+    return res.status(500).json({
+      message: "Error reading CSV file",
+      error: error.message
+    });
   }
 };
 

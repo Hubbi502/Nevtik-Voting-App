@@ -11,7 +11,7 @@ router.get("/users/:email",isAuthorized, getSpecificUser);
 router.post("/login",isLoginValid, login);
 router.post("/register",isRegisterValid,isAuthorized , register);
 router.post("/upload/csv", isAuthorized, upload.single('csv'), uploadCSV);
-router.get("/register/csv/:filename", isAuthorized,isDataValid, readCSV)
+router.post("/register/csv/:filename", isAuthorized,isDataValid, readCSV)
 router.post("/logout", logoutUser)
 
 export default router;

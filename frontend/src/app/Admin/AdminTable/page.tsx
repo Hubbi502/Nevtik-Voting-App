@@ -1,4 +1,4 @@
-import AdminFinal from "../../components/component/views/Admin/Admin-Table/page";
+import AdminFinal from "../../../components/component/views/Admin/Admin-Table/page";
 
 export default function Admin() {
     return (

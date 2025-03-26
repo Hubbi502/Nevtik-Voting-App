@@ -9,7 +9,7 @@ const PieChart: React.FC = () => {
     labels: ["Calon 1", "Calon 2", "Calon 3"],
     datasets: [
       {
-        data: [41, 33, 26],
+        data: [40, 30, 30],
         backgroundColor: ["#CF4100", "#FE4F2D", "#FF0004"],
         borderColor: "#ffffff",
         borderWidth: 2,
@@ -33,7 +33,7 @@ const PieChart: React.FC = () => {
   };
 
   return (
-    <div className='flex items-center justify-center p-4'>
+    <div className='flex mt-4 items-center justify-center mt-4 p-4'>
       <Pie data={data} options={options} />
     </div>
   );

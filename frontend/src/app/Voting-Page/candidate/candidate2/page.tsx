@@ -9,7 +9,7 @@ import Pagination from "@/components/Pagination";
 import { link } from "fs";
 
 const Candidates = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(2);
   const totalPages = 3;
 
   const handlePageChange = (page: number) => {
@@ -19,7 +19,7 @@ const Candidates = () => {
   return (
     <div className='h-screen'>
       <Menu />
-      <div className='flex items-center gap-30 justify-center'>
+      <div className='flex mt-12 items-center gap-30 justify-center'>
         <div>
           <BiodataCard
             name='John Anderson'
@@ -40,7 +40,7 @@ const Candidates = () => {
           />
         </div>
       </div>
-      <div className='place-items-center mt-7'>
+      <div className='place-items-center mt-12 '>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

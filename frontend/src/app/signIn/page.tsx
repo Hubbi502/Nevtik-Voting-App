@@ -92,7 +92,7 @@ export default function SignIn() {
               </div>
             </div>
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center mb-4">
               <div className="flex items-center">
                 <input
                   id="remember"
@@ -103,7 +103,14 @@ export default function SignIn() {
                 <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
                   Remember me
                 </label>
+                
               </div>
+              <a
+                 href='#'
+                 className='ml-auto text-sm text-black hover:text-red-600'
+               >
+                 Forgot password?
+               </a>
             </div>
 
             <div>

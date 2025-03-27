@@ -5,11 +5,18 @@ export const authApi = {
   login: async (email: string, password: string) => {
     const response = await fetch(`${API_BASE_URL}/auth/login`, {
       method: 'POST',
-      headers: defaultHeaders,
-      credentials: 'include',
+      headers: {
+        ...defaultHeaders,
+      },
+      credentials: 'include', // Important for cookies
       body: JSON.stringify({ email, password }),
     });
-    return response.json() as Promise<ApiResponse<User>>;
+    
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+    
+    return response.json();
   },
 
   register: async (userData: {

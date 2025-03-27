@@ -1,7 +1,38 @@
+'use client';
 import Image from "next/image";
-import Link from "next/link";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { authApi } from "@/lib/api/auth";
 
-export default function Home() {
+export default function SignIn() {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const response = await authApi.login(formData.email, formData.password);
+      if (response.message === "success") {
+        router.push('/Voting-Page/candidate/candidate1'); // Redirect to voting page after successful login
+      } else {
+        setError(response.message);
+      }
+    } catch (err) {
+      setError('Failed to sign in. Please check your credentials.');
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div className='flex items-center sm:p-20 justify-center gap-50 h-screen'>
       <div className='w-135 bg-gradient-to-b from-red-600 via-white to-red-600 h-150 rounded-tl-4xl rounded-br-4xl flex justify-center items-center'>
@@ -18,84 +49,80 @@ export default function Home() {
           <h2 className='text-4xl'>Pemilu Nevtik 2025</h2>
         </div>
         <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-          <form action='#' method='POST' className='space-y-6'>
+          <form onSubmit={handleSubmit} className='space-y-6'>
+            {error && (
+              <div className="p-3 text-sm text-red-600 bg-red-100 rounded-md">
+                {error}
+              </div>
+            )}
+            
             <div>
-              <label
-                htmlFor='email'
-                className='block text-sm/6 font-medium text-gray-900'
-              >
+              <label htmlFor="email" className="block text-sm font-medium text-gray-900">
                 Email address
               </label>
-              <div className='mt-2'>
+              <div className="mt-2">
                 <input
-                  id='email'
-                  name='email'
-                  placeholder='Enter your email address'
-                  type='email'
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
                   required
-                  autoComplete='email'
-                  className='block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600 sm:text-sm/6'
+                  value={formData.email}
+                  onChange={handleChange}
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600"
                 />
               </div>
             </div>
 
             <div>
-              <div className='flex items-center justify-between'>
-                <label
-                  htmlFor='password'
-                  className='block text-sm/6 font-medium text-gray-900'
-                >
-                  Password
-                </label>
-              </div>
-              <div className='mt-2'>
+              <label htmlFor="password" className="block text-sm font-medium text-gray-900">
+                Password
+              </label>
+              <div className="mt-2">
                 <input
-                  id='password'
-                  name='password'
-                  type='password'
-                  placeholder='********'
+                  id="password"
+                  name="password"
+                  type="password"
+                  autoComplete="current-password"
                   required
-                  autoComplete='current-password'
-                  className='block w-full rounded-md px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-600 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-red-600 sm:text-sm/6'
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="block w-full rounded-md px-3 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600"
                 />
               </div>
             </div>
 
-            <div className='flex items-center mb-4'>
-              <input
-                type='checkbox'
-                id='remember'
-                className='mr-2 text-orange-600'
-              />
-              <label htmlFor='remember' className='text-sm text-black'>
-                Remember me
-              </label>
-              <a
-                href='#'
-                className='ml-auto text-sm text-black hover:text-red-600'
-              >
-                Forgot password?
-              </a>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <input
+                  id="remember"
+                  name="remember"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300 text-red-600 focus:ring-red-600"
+                />
+                <label htmlFor="remember" className="ml-2 block text-sm text-gray-900">
+                  Remember me
+                </label>
+              </div>
             </div>
 
             <div>
               <button
-                type='submit'
-                className='flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm/6 font-semibold text-black shadow-xs hover:bg-red-500 hover:cursor-pointer hover:text-white'
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
               >
-                <Link href='/landing'>Sign in</Link>
+                Sign in
               </button>
             </div>
           </form>
 
-          <div className='flex mt-5 items-center justify-center'>
+          <div className="mt-6 flex items-center justify-center">
             <Image
               src={"/assets/nevtik1.svg"}
               alt={"logo-nevtik"}
               width={45}
               height={45}
             />
-            <p className='text-2xl text-gray-600 mx-2.5'>By NevtikAcademy</p>
           </div>
         </div>
       </div>

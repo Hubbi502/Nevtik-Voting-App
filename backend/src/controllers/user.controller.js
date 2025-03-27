@@ -85,23 +85,12 @@ export const register = async (req = request, res = response)=>{
 
 export const getUsers = async (req = request, res = response) => {
   try {
-    const page = parseInt(req.query.page);
-    const limit = 6;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 25;
     const skip = (page - 1) * limit;
 
-    let users;
-    if(!page || page < 1){
-    users = await prisma.user.findMany({
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        divisi: true
-      }
-    });
-  }else{
-    users = await prisma.user.findMany({
-      skip: skip,
+    const users = await prisma.user.findMany({
+      skip,
       take: limit,
       select: {
         id: true,
@@ -111,16 +100,21 @@ export const getUsers = async (req = request, res = response) => {
       }
     });
 
-  }
+    const total = await prisma.user.count();
+    const totalPages = Math.ceil(total / limit);
 
     res.status(200).json({
       message: "success",
-      data: users
+      data: users,
+      total,
+      currentPage: page,
+      totalPages
     });
   } catch (error) {
-    res.status(500).json({
+    console.error('Error fetching users:', error);
+    res.status(500).json({ 
       message: "Error fetching users",
-      error: error.message
+      error: error.message 
     });
   }
 };

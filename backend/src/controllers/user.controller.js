@@ -86,7 +86,7 @@ export const register = async (req = request, res = response)=>{
 export const getUsers = async (req = request, res = response) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 25;
+    const limit = parseInt(req.query.limit) || 6;
     const skip = (page - 1) * limit;
 
     const users = await prisma.user.findMany({

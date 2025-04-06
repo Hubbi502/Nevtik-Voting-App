@@ -8,8 +8,8 @@ export interface User {
 export interface Candidate {
   id: string;
   name: string;
-  vision: string;
-  mission: string;
+  vision: string[] | string;
+  mission: string[] | string;
   divisi: string;
   kelas: string;
   jurusan: string;

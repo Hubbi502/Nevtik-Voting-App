@@ -121,12 +121,6 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #F8F2DE;
-  }
-}
-
-body {
-  background: var(--background);
+.jersey {
+  font-family: var(--font-jersey-10);
 }

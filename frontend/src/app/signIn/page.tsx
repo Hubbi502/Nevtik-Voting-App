@@ -43,7 +43,7 @@ export default function SignIn() {
     <div className='bg-gradient-to-b from-red-800 to-red-400 flex items-center justify-center h-screen my-auto'>
       <div>
         <Image
-          src={"assets/banner1.svg"}
+          src={"assets/banner.svg"}
           alt='banner'
           width={700}
           height={100}

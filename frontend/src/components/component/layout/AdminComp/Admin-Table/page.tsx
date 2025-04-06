@@ -55,17 +55,36 @@ const DropdownButton = ({ title, items }: { title: string; items: string[] }) =>
   );
 };
 
+const getPaginationRange = (currentPage: number, totalPages: number) => {
+  const delta = 2; 
+  const range: (number | string)[] = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (
+      i === 1 || 
+      i === totalPages ||
+      (i >= currentPage - delta && i <= currentPage + delta)
+    ) {
+      range.push(i);
+    } else if (range[range.length - 1] !== '...') {
+      range.push('...');
+    }
+  }
+
+  return range;
+};
+
 export default function AdminTable() {
   const [users, setUsers] = useState<User[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // Initialize with 1
+  const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const USERS_PER_PAGE = 6;
 
   const fetchUsers = async (page: number) => {
     try {
-      console.log('Fetching page:', page); // Debug log
+      console.log('Fetching page:', page); 
       const response = await fetch(`http://localhost:5000/auth/users?page=${page}&limit=${USERS_PER_PAGE}`, {
         credentials: 'include',
         headers: {
@@ -74,7 +93,7 @@ export default function AdminTable() {
       });
 
       const data: ApiResponse = await response.json();
-      console.log('API Response:', data); // Debug log
+      console.log('API Response:', data); 
 
       if (response.ok && data.message === "success") {
         setUsers(data.data);
@@ -169,14 +188,18 @@ export default function AdminTable() {
                         />
                       </PaginationItem>
                       
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
-                        <PaginationItem key={pageNum}>
-                          <PaginationLink
-                            isActive={currentPage === pageNum}
-                            onClick={() => handlePageChange(pageNum)}
-                          >
-                            {pageNum}
-                          </PaginationLink>
+                      {getPaginationRange(currentPage, totalPages).map((pageNum, index) => (
+                        <PaginationItem key={index}>
+                          {pageNum === '...' ? (
+                            <span className="px-4 py-2">...</span>
+                          ) : (
+                            <PaginationLink
+                              isActive={currentPage === pageNum}
+                              onClick={() => handlePageChange(pageNum as number)}
+                            >
+                              {pageNum}
+                            </PaginationLink>
+                          )}
                         </PaginationItem>
                       ))}
 

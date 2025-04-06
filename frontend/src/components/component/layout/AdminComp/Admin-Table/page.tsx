@@ -61,7 +61,7 @@ export default function AdminTable() {
   const [totalPages, setTotalPages] = useState(1); // Initialize with 1
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const USERS_PER_PAGE = 25;
+  const USERS_PER_PAGE = 6;
 
   const fetchUsers = async (page: number) => {
     try {

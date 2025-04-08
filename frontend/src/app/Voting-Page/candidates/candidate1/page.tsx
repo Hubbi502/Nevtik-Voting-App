@@ -40,7 +40,7 @@ const Candidates = () => {
           />
         </div>
       </div>
-      <div className='place-items-center mt-2'>
+      <div className='place-items-center mt-5'>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

@@ -23,7 +23,7 @@ const Candidates = () => {
         <div>
           <BiodataCard
             name='John Anderson'
-            className='XII RPL 1'
+            className='XII RPL 2'
             division='Web Development'
           />
           <Tabs

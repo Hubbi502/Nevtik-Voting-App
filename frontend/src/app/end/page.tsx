@@ -13,9 +13,9 @@ export default function End() {
         <h2 className='text-xl font-bold'>
           "Setiap suara membawa perubahan. Nevtik terus maju karena Anda!"
         </h2>
-        <button className='px-30 py-2 bg-red-600 rounded-xl text-white shadow-black shadow-sm text-2xl hover:cursor-pointer'>
+        <a href="/" className='px-30 py-2 mt-12 bg-red-600 rounded-xl hover:bg-black duration-500 ease-in text-white shadow-black shadow-sm text-2xl hover:cursor-pointer'>
           Kembali
-        </button>
+        </a>
       </div>
     </div>
   );

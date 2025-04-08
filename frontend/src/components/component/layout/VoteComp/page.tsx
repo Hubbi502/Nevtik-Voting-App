@@ -8,14 +8,14 @@ interface Candidate {
   name: string;
   division: string;
   image: string;
-  quote: string;
+ 
   href: string;
 }
 
 const candidates: Candidate[] = [
-  { name: "Player 1", division: "Web Dev", image: "/pino.png", quote: '5 years experience in IT leadership', href: "/Voting-Page/candidate/candidate1/" },
-  { name: "Player 1", division: "Web Dev", image: "/pino.png", quote: '5 years experience in IT leadership', href: "/Voting-Page/candidate/candidate1/" },
-  { name: "Player 1", division: "Web Dev", image: "/pino.png", quote: '5 years experience in IT leadership', href: "/Voting-Page/candidate/candidate1/" },
+  { name: "Player 1", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate1/" },
+  { name: "Player 2", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate2/" },
+  { name: "Player 3", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate3/" },
 ];
 
 export default function VoteCard() {
@@ -33,7 +33,7 @@ export default function VoteCard() {
   };
 
   const confirmYes = () => {
-    window.location.href = "/thank-you"; // Adjust the route based on your setup
+    window.location.href = "/end"; // Adjust the route based on your setup
   };
 
   return (
@@ -59,17 +59,25 @@ export default function VoteCard() {
 
       {/* Modal */}
       {isModalOpen && selectedCandidate && (
-        <div className="fixed inset-0 flex z-20  justify-center items-center bg-black/25 bg-opacity-50">
-          <div className="bg-white/80 px-12 py-8 rounded-lg shadow-lg text-center">
-            <p className="text-lg font-semibold">
-              Apakah Anda Yakin Ingin memilih {selectedCandidate.name}?
+        <div className="fixed inset-0 flex z-20 justify-center items-center bg-black/25 bg-opacity-50">
+          <div className="bg-white w-1/2 h-1/2 flex flex-col justify-center px-12 py-8 rounded-lg shadow-lg text-center">
+            <div className="text-center flex justify-center items-center mb-12">
+              <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0 35C0 15.67 15.67 0 35 0C54.33 0 70 15.67 70 35C70 54.33 54.33 70 35 70C15.67 70 0 54.33 0 35Z" fill="#FEF2F2"/>
+                  <path d="M34.5 53.25C44.8553 53.25 53.25 44.8553 53.25 34.5C53.25 24.1447 44.8553 15.75 34.5 15.75C24.1447 15.75 15.75 24.1447 15.75 34.5C15.75 44.8553 24.1447 53.25 34.5 53.25Z" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M34.5 27V34.5" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M34.5 42H34.5188" stroke="#EF4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p className="text-3xl font-semibold">
+              Apakah Anda Yakin Ingin memilih <br /> Kandidat Ini?
             </p>
             <p className="text-lg font-thin mb-10">Note: Jangan sampai anda salah pilih</p>
-            <div className="flex justify-center gap-12">
-              <button onClick={confirmYes} className="bg-green-600 hover:bg-white  hover:text-black duration-300 ease-in text-white px-10 py-2 rounded cursor-pointer">
+            <div className="flex justify-center gap-12 mt-2">
+              <button onClick={confirmYes} className="bg-[#10B981] hover:bg-white border  hover:text-black duration-300 ease-in text-white px-18 py-2 rounded-xl cursor-pointer">
                 Iya
               </button>
-              <button onClick={closeModal} className="bg-[#E31F1F] text-white px-10 py-2 rounded cursor-pointer">
+              <button onClick={closeModal} className="bg-[#E31F1F]  hover:bg-white border  hover:text-black duration-300 ease-in text-white px-18 py-2 rounded-xl cursor-pointer">
                 Tidak
               </button>
             </div>
@@ -93,36 +101,24 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
         </div>
         <div className=" text-center pt-3 flex flex-wrap flex-col justify-center">
             <Image src={candidate.image} alt={candidate.name} width={300} height={300} className="mx-auto" />
-            <div className="flex items-start px-12">
-              <p className="text-lg  font-thin text-black mt-4">{candidate.quote}</p>
-              <div className="relative border">
-                 <div className="absolute cursor-pointer border hover:rotate-180 duration-300 ease-in-out border-black/25 p-2 rounded-full -top-7 left-5">
-                    <a href="/" className=""><svg width="23" height="20" viewBox="0 0 23 20" fill="none" className="" xmlns="http://www.w3.org/2000/svg">
+              <div className="relative">
+                 <div className="absolute cursor-pointer border hover:rotate-180 duration-300 ease-in-out border-black/25 p-2 rounded-full -top-9 right-2 ">
+                    <a href={candidate.href} className=""><svg width="23" height="20" viewBox="0 0 23 20" fill="none" className="" xmlns="http://www.w3.org/2000/svg">
                       <path className="" d="M22.0899 18.9832C22.6391 18.9254 23.0375 18.4333 22.9797 17.884L22.0378 8.93348C21.98 8.38423 21.4879 7.98583 20.9386 8.04363C20.3894 8.10143 19.991 8.59355 20.0488 9.1428L20.8861 17.0989L12.93 17.9362C12.3807 17.994 11.9823 18.4861 12.0401 19.0353C12.098 19.5846 12.5901 19.983 13.1393 19.9252L22.0899 18.9832ZM0.370784 1.77711L21.356 18.7659L22.6144 17.2115L1.62922 0.222647L0.370784 1.77711Z" fill="black"/>
                       </svg>
                     </a>
                  </div>
               </div>
-            </div>
-          <div className="mt-4 flex justify-between items-center   py-3 px-12">
-            <div className="flex">
-            <svg xmlns="http://www.w3.org/2000/svg" width={22} height={22} viewBox="0 0 512 512" className="text-[#DC2626] mr-2"><path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth={32} d="M320 458.16S304 464 256 464s-74-16-96-32H96a64 64 0 0 1-64-64v-48a64 64 0 0 1 64-64h30a32.34 32.34 0 0 0 27.37-15.4S162 221.81 188 176.78S264 64 272 48c29 0 43 22 34 47.71c-10.28 29.39-23.71 54.38-27.46 87.09c-.54 4.78 3.14 12 7.95 12L416 205"></path><path fill="none" stroke="currentColor" strokeMiterlimit={10} strokeWidth={32} d="m416 271l-80-2c-20-1.84-32-12.4-32-30s14-28.84 32-30l80-4c17.6 0 32 16.4 32 34v.17A32 32 0 0 1 416 271Zm32 65l-112-2c-18-.84-32-12.41-32-30c0-17.61 14-28.86 32-30l112-2a32.1 32.1 0 0 1 32 32a32.1 32.1 0 0 1-32 32Zm-48 128l-64-3c-21-1.84-32-11.4-32-29s14.4-30 32-30l64-2a32.09 32.09 0 0 1 32 32a32.09 32.09 0 0 1-32 32Zm32-64l-96-2c-19-.84-32-12.4-32-30s13-28.84 32-30l96-2a32.09 32.09 0 0 1 32 32a32.09 32.09 0 0 1-32 32Z"></path></svg>
-              <p>124 Votes
-            </p>
-            </div>
-
-          <button
-            onClick={() => openModal(candidate)}
-            className="rounded-lg hover:bg-white hover:text-black duration-300 border right-1/4 bg-red-800 px-6 py-2 text-white cursor-pointer"
-          >
-            Vote Me
-          </button>
-
-          </div>
-        
         </div>
-  
-      </div>
+          <div className="mt-8  items-center py-3 ">
+            <button
+              onClick={() => openModal(candidate)}
+              className="rounded-lg hover:bg-white  hover:text-black duration-300 border right-1/4 bg-red-800 px-18 py-2 text-white cursor-pointer"
+            >
+              Vote Me
+            </button>
+          </div>
+        </div>
     </>   
   );
 }

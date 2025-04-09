@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Jersey_10 } from "next/font/google";
+"use client";
+
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/component/views/navbar/page";
+import { usePathname } from "next/navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,21 +15,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Pemilu Nevtik 2025/2026"
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
+        {/* Render Navbar only if the current route is not /signIn */}
+        {pathname !== "/signIn" && <Navbar />}
         {children}
       </body>
     </html>

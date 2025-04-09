@@ -49,4 +49,11 @@ export const authApi = {
     });
     return response.json() as Promise<ApiResponse<User[]>>;
   },
+
+  getCurrentUser: async ()=>{
+    const response = await fetch(`${API_BASE_URL}/auth/user`, {
+      credentials: 'include',
+    });
+    return response.json() as Promise<ApiResponse<User>>;
+  }
 };

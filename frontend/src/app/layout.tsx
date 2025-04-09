@@ -1,9 +1,9 @@
 "use client";
 
+import ClientNavbarWrapper from "@/components/component/views/navbar/ClientNavbarWrapper";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import Navbar from "../components/component/views/navbar/page";
 import { usePathname } from "next/navigation";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +28,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/* Render Navbar only if the current route is not /signIn */}
-        {pathname !== "/signIn" && <Navbar />}
+        <ClientNavbarWrapper />
         {children}
       </body>
     </html>

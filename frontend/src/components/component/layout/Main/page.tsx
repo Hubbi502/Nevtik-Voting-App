@@ -1,4 +1,22 @@
+"use client";
+
+import { authApi } from "@/lib/api"
+import { useEffect, useState } from "react"
+
 export default function MainComp() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  useEffect(()=>{
+    (async()=>{
+      try {
+        const response = await authApi.getCurrentUser()
+        if(response.data){
+          setIsLoggedIn(true)
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error)
+      }
+    })()
+  },[])
   return (
       <>
       <div className="bg-[#F8F2DE] w-full h-screen relative flex flex-col">
@@ -18,7 +36,7 @@ export default function MainComp() {
             </p>
             <div className="mt-10">
               <a 
-                href="/Voting-Page" 
+                href={isLoggedIn ? "/Voting-Page" : "/signIn"} 
                 className="w-full h-full p-4 bg-red-500 rounded-xl text-white text-2xl hover:bg-amber-50 hover:text-black ease-in duration-300" 
                 style={{ fontFamily: "Times New Roman, serif" }}
               >

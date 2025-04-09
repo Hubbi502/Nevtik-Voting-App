@@ -40,8 +40,8 @@ export default function VoteCard() {
     if (!selectedCandidate) return;
     try {
       const response = await voteApi.castVote(selectedCandidate.id);
-      if(!response.success) {
-        alert("Gagal melakukan vote");
+      if(response.message !== "success") {
+        alert(response.message);
         return;
       }
       window.location.href = "/end"; // Adjust the route based on your setup

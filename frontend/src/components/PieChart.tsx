@@ -1,8 +1,10 @@
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { candidateApi } from "@/lib/api";
 import React from "react";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
 
 const PieChart: React.FC = () => {
   const data = {

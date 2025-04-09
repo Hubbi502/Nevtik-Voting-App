@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const divisi = z.enum(["Web Development", "ITNSA", "Cyber Security"], {
+export const divisi = z.enum(["Web Development", "ITNSA", "Cyber Security", "AI"], {
   errorMap: () => ({ message: "Divisi tidak valid!" }),
 });
 

@@ -1,11 +1,9 @@
-import prisma from "../utils/prisma.js";
+import { compare, hash } from "bcrypt";
 import { request, response } from "express";
-import { hash, compare } from "bcrypt";
-import { createToken } from "../libs/jwt.js";
 import path from 'path';
-import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
-import { parseCsv } from "../utils/csv-parser.js";
+import { createToken } from "../libs/jwt.js";
+import prisma from "../utils/prisma.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -137,6 +135,10 @@ export const getSpecificUser = async (req = request, res = response)=>{
       error: error.message
     });
   }
+}
+
+export const getCurrentUser = async (req= request, res = response)=>{
+  res.json(req.user.userId)
 }
 
 export const logoutUser = async (req = request, res = response) => {

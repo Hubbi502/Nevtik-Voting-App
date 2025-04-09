@@ -42,7 +42,7 @@ export const uploadImage = async (req = request, res = response) => {
   }
 
   const { id } = req.params;
-  const imageUrl = `/candidates/img/${req.file.filename}`;
+  const imageUrl = `http://localhost:5000/candidates/img/${req.file.filename}`;
 
   try {
     const updatedCandidate = await prisma.candidate.update({

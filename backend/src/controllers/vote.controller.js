@@ -1,6 +1,6 @@
-import prisma from "../utils/prisma.js";
 import { request, response } from "express";
 import { verifyToken } from "../libs/jwt.js";
+import prisma from "../utils/prisma.js";
 
 export const addVote = async (req = request, res = response) => {
   const token = req.cookies.token;
@@ -24,7 +24,7 @@ export const addVote = async (req = request, res = response) => {
     });
 
     res.status(201).json({
-      message: "Success",
+      message: "success",
       data: vote,
     });
   } catch (error) {

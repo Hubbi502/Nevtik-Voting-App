@@ -13,5 +13,6 @@ const jsonSchema = z.record(z.string()).refine((data)=>{
 export const addCandidatesSchema = z.object({
   name: z.string().nonempty("Nama tidak boleh kosong"),
   vision: jsonSchema,
-  mission: jsonSchema
+  mission: jsonSchema,
+  divisi: divisi,
 });

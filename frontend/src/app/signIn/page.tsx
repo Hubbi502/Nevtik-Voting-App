@@ -1,9 +1,10 @@
 "use client";
-import Image from "next/image";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+
 import { authApi } from "@/lib/api/auth";
 import { Jersey_10 } from "next/font/google";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
   const jersey10 = Jersey_10({
     weight: "400",
@@ -40,7 +41,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className='bg-gradient-to-b from-red-800 to-red-400 flex items-center justify-center h-screen my-auto'>
+    <div className='bg-gradient-to-b from-red-800 to-red-400 flex items-center justify-center h-screen my-auto '>
       <div>
         <Image
           src={"assets/banner.svg"}

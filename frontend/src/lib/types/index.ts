@@ -14,6 +14,7 @@ export interface Candidate {
   kelas: string;
   jurusan: string;
   image?: string;
+  href?: string;
 }
 
 export interface Vote {

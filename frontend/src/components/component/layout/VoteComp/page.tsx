@@ -13,7 +13,7 @@ interface Candidate {
 }
 
 const candidates: Candidate[] = [
-  { name: "Player 1", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate1/" },
+  { name: "Player 1", division: "Web Dev", image: "/pino-bg.jpg", href: "/Voting-Page/candidates/candidate1/" },
   { name: "Player 2", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate2/" },
   { name: "Player 3", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate3/" },
 ];
@@ -45,13 +45,13 @@ export default function VoteCard() {
 
       {/* Candidate Cards */}
       <div className="bg-[#FFFFFF] shadow-2xl flex flex-col">
-        <div className="flex p-12  justify-center items-center mt-4 gap-20 ">
+        <div className="flex py-4 px-12  justify-center items-center mt-4 gap-20 ">
           {candidates.map((candidate, index) => (
             <CandidateCard key={index} candidate={candidate} openModal={openModal} />
           ))}
           
         </div>
-        <div className="px-12 items-center flex justify-between mb-4">
+        <div className="px-12 items-center flex justify-between mb-3">
           <p>Total Votes : 12345</p>
           <Countdown targetDate="2025-05-01T00:00:00" />
         </div>
@@ -99,8 +99,8 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
           </div>
           <span className="text-[18px] font-thin text-white">{candidate.division}</span>
         </div>
-        <div className=" text-center pt-3 flex flex-wrap flex-col justify-center">
-            <Image src={candidate.image} alt={candidate.name} width={300} height={300} className="mx-auto" />
+        <div className=" text-center pt-3 flex flex-wrap flex-col justify-center ">
+            <Image src={candidate.image} alt={candidate.name} width={300} height={300} className="w-full" />
               <div className="relative">
                  <div className="absolute cursor-pointer border hover:rotate-180 duration-300 ease-in-out border-black/25 p-2 rounded-full -top-9 right-2 ">
                     <a href={candidate.href} className=""><svg width="23" height="20" viewBox="0 0 23 20" fill="none" className="" xmlns="http://www.w3.org/2000/svg">

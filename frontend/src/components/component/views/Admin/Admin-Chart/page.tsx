@@ -4,7 +4,7 @@ export default function AdminChartFinal() {
     return (
      <>
 
-     <div className="bg-[#F8F2DE} flex  w-full h-screen">
+     <div className=" bg-[#F8F2DE] flex  w-full h-screen">
          <AdminRow />
          <Static />
      </div>

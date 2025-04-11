@@ -19,7 +19,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         src={imageUrl}
         alt='Profile picture'
         width={500}
-        height={600}
+        height={500}
         className=' object-cover '
       />
       <div className='mx-12 my-5'>

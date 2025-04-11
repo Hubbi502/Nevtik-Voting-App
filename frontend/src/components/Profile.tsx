@@ -14,16 +14,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   division,
 }) => {
   return (
-    <div className='w-70 bg-white rounded-lg shadow-lg overflow-hidden place-items-center'>
+    <div className='w-full h-[45rem] bg-white rounded-lg shadow-lg overflow-hidden'>
       <img
         src={imageUrl}
         alt='Profile picture'
-        className='w-40 object-cover '
+        width={500}
+        height={600}
+        className=' object-cover '
       />
-      <div className='p-4'>
-        <h2 className='text-xl font-semibold text-gray-900'>{name}</h2>
-        <p className='text-gray-600'>Kelas: {className}</p>
-        <p className='text-gray-600'>Divisi: {division}</p>
+      <div className='mx-12 my-5'>
+        <h2 className='text-4xl font-semibold text-gray-900'>{name}</h2>
+        <p className='text-gray-600 mt-6 font-semibold'>Kelas : {className}</p>
+        <p className='text-gray-600 font-semibold'>Divisi  : {division}</p>
       </div>
     </div>
   );

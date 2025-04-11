@@ -9,7 +9,7 @@ const Tabs: React.FC<TabProps> = ({ visi, misi }) => {
   const [activeTab, setActiveTab] = useState<"visi" | "misi">("visi");
 
   return (
-    <div className='w-2xl mt-5 bg-white rounded-lg shadow-md overflow-hidden'>
+    <div className='w-5xl h-full min-h-96 mt-5 bg-white rounded-lg shadow-md overflow-hidden'>
       <div className='flex border-b'>
         <button
           onClick={() => setActiveTab("visi")}

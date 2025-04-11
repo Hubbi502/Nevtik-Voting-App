@@ -12,9 +12,9 @@ const BiodataCard: React.FC<BiodataCardProps> = ({
   division,
 }) => {
   return (
-    <div className='w-2xl mt-5 bg-white rounded-lg shadow-lg overflow-hidden'>
+    <div className='w-5xl mt-5 bg-white rounded-lg shadow-lg overflow-hidden'>
       <div className='bg-red-600 p-4 text-white'>
-        <h2 className='text-lg font-semibold'>Kandidat Ketua OSIS</h2>
+        <h2 className='text-lg font-semibold'>Kandidat Ketua NEVTIK</h2>
       </div>
       <div className='p-4'>
         <div className='space-y-4'>

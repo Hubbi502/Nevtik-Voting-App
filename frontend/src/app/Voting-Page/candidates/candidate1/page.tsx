@@ -18,9 +18,8 @@ const Candidates = () => {
 
   return (
     <div className='h-screen bg-orange-50'>
-      <Menu />
-      <div className=' mt-12 flex items-center gap-30 justify-center'>
-        <div>
+      <div className=' flex items-center  justify-center'>
+        <div >
           <BiodataCard
             name='John Anderson'
             className='XII RPL 1'
@@ -31,7 +30,7 @@ const Candidates = () => {
             misi='biarkan tuhan mau memberi jodoh orang mana, asal jangan orang israel, PAHAM!!!'
           />
         </div>
-        <div className='mt-7'>
+        <div className=''>
           <ProfileCard
             imageUrl='/assets/fahri.svg'
             name='John Anderson'
@@ -40,7 +39,7 @@ const Candidates = () => {
           />
         </div>
       </div>
-      <div className='place-items-center mt-5'>
+      <div className='place-items-center '>
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}

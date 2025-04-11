@@ -9,14 +9,7 @@ import { useState } from "react";
 import { Candidate } from "@/lib/types";
 
 
-<<<<<<< HEAD
-const candidates: Candidate[] = [
-  { name: "Player 1", division: "Web Dev", image: "/pino-bg.jpg", href: "/Voting-Page/candidates/candidate1/" },
-  { name: "Player 2", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate2/" },
-  { name: "Player 3", division: "Web Dev", image: "/pino.png", href: "/Voting-Page/candidates/candidate3/" },
-];
-=======
->>>>>>> 4b6eaa685a79843dcd1c51558b40cca063747bde
+
 
 export default function VoteCard() {
   const { candidates, loading, error } = useCandidate() as { candidates: Candidate[]; loading: boolean; error: any };
@@ -67,13 +60,8 @@ export default function VoteCard() {
 
       {/* Candidate Cards */}
       <div className="bg-[#FFFFFF] shadow-2xl flex flex-col">
-<<<<<<< HEAD
-        <div className="flex py-4 px-12  justify-center items-center mt-4 gap-20 ">
-          {candidates.map((candidate, index) => (
-=======
-        <div className="flex p-12  justify-center items-center mt-4 gap-20 ">
-          {candidatesRaw.map((candidate:Candidate, index) => (
->>>>>>> 4b6eaa685a79843dcd1c51558b40cca063747bde
+        <div className="flex py-12 px-12  justify-center items-center mt-4 gap-20">
+          {candidatesRaw.map((candidate, index) => (
             <CandidateCard key={index} candidate={candidate} openModal={openModal} />
           ))}
           
@@ -119,22 +107,17 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
   return (
     <>   
       <div className=" h-full w-96 text-center flex flex-col flex-wrap">
-        <div className="bg-[#E64848] rounded-lg flex justify-between p-7 rounded-b-md  z-6 py-4 text-white">
+        <div className="bg-[#E64848] rounded-tr-lg rounded-tl-lg flex justify-between p-7 z-6 py-4 text-white">
           <div className="flex justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width={26} height={26} viewBox="0 0 24 24" className="text-[#f7cccc] "><path fill="currentColor" d="M12 5.9a2.1 2.1 0 1 1 0 4.2a2.1 2.1 0 0 1 0-4.2m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4m0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4"></path></svg>
             <h1 className="text-xl font-semibold  font-sans text-white pl-3 ">{candidate.name}</h1>
           </div>
           <span className="text-[18px] font-thin text-white">{candidate.divisi}</span>
         </div>
-<<<<<<< HEAD
-        <div className=" text-center pt-3 flex flex-wrap flex-col justify-center ">
-            <Image src={candidate.image} alt={candidate.name} width={300} height={300} className="w-full" />
-=======
-        <div className=" text-center pt-3 flex flex-wrap flex-col justify-center">
-            <Image src={candidate.image || "/pino.png"} alt={candidate.name} className="mx-auto " width={300} height={400} />
->>>>>>> 4b6eaa685a79843dcd1c51558b40cca063747bde
+        <div className=" text-center flex-wrap flex-col justify-center ">
+            <Image src={candidate.image || "/pino.png"} alt={candidate.name} width={300} height={300} className="w-full mb-9 rounded-br-lg rounded-bl-lg" />
               <div className="relative">
-                 <div className="absolute cursor-pointer border hover:rotate-180  duration-300 ease-in-out border-black/25 p-2 rounded-full -top-9 right-2 ">
+                 <div className="absolute bg-white cursor-pointer border hover:rotate-180  duration-300 ease-in-out border-black/25 p-2 rounded-full -top-24 right-2 ">
                     <a href={candidate.href} className=""><svg width="23" height="20" viewBox="0 0 23 20" fill="none" className="" xmlns="http://www.w3.org/2000/svg">
                       <path className="" d="M22.0899 18.9832C22.6391 18.9254 23.0375 18.4333 22.9797 17.884L22.0378 8.93348C21.98 8.38423 21.4879 7.98583 20.9386 8.04363C20.3894 8.10143 19.991 8.59355 20.0488 9.1428L20.8861 17.0989L12.93 17.9362C12.3807 17.994 11.9823 18.4861 12.0401 19.0353C12.098 19.5846 12.5901 19.983 13.1393 19.9252L22.0899 18.9832ZM0.370784 1.77711L21.356 18.7659L22.6144 17.2115L1.62922 0.222647L0.370784 1.77711Z" fill="black"/>
                       </svg>
@@ -142,10 +125,10 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
                  </div>
               </div>
         </div>
-          <div className="mt-8  items-center py-3 ">
+          <div className="mt-32 items-center py-3 ">
             <button
               onClick={() => openModal(candidate)}
-              className="rounded-lg hover:bg-white  hover:text-black duration-300 border right-1/4 bg-red-800 px-18 py-2 text-white cursor-pointer"
+              className="rounded-lg hover:bg-white  hover:text-black duration-300 border right-1/4 bg-red-800 w-full py-2 text-white cursor-pointer"
             >
               Vote Me
             </button>

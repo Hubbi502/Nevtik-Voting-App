@@ -1,5 +1,5 @@
-import prisma from "../utils/prisma.js";
 import { request, response } from "express";
+import prisma from "../utils/prisma.js";
 
 export const getCandidates = async (req = request, res = response) => {
   try {
@@ -104,6 +104,10 @@ export const getVotePercentage = async (req = request, res = response) => {
       message: "successful",
       data: allCandidates.map(candidate => ({
         name: candidate.name,
+        vision: candidate.vision,
+        mission: candidate.mission,
+        divisi: candidate.divisi,
+        image: candidate.image,
         percentage: totalVotes > 0 ? ((candidate.votes.length / totalVotes) * 100).toFixed(1) : "0" 
       }))
     });

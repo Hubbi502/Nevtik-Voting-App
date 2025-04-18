@@ -49,7 +49,7 @@ const PieChart: React.FC = () => {
 
   return (
     <div className="flex mt-4 items-center justify-center p-4">
-      <Pie data={data} options={options} />
+      <Pie data={data} />
     </div>
   );
 };

@@ -75,5 +75,5 @@ const PieChart: React.FC = () => {
     </div>
   );
 };
-
+ 
 export default PieChart;

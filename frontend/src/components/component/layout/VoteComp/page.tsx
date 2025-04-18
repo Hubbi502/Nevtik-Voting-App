@@ -52,22 +52,20 @@ export default function VoteCard() {
   };
 
   return (
-    <div className="flex w-full h-screen justify-center items-center flex-col bg-[#F8F2DE]">
+    <div className="flex w-full h-screen justify-center items-center flex-col  bg-[#F8F2DE]">
       <h1 className="text-4xl font-bold pt-20 text-center ">
         Ayo Vote! Siapa Pemimpin Nevtik Selanjutnya!
       </h1>
       <p className="font-thin mt-2 mb-4">Pilih kandidat terbaik untuk memimpin organisasi kita ke depan</p>
 
       {/* Candidate Cards */}
-      <div className="bg-[#FFFFFF] shadow-2xl flex flex-col">
-        <div className="flex py-12 px-12  justify-center items-center mt-4 gap-20">
+      <div className="bg-[#ffffff59] mt-0  w-auto shadow-2xl flex flex-wrap flex-col sm:bg-[#F8F2DE] sm:mt-[50rem] lg:bg-[#ffffff59] lg:mt-0">
+        <div className="flex flex-wrap px-12 py-12 justify-center items-center mt-4 gap-20">
           {candidatesRaw.map((candidate, index) => (
             <CandidateCard key={index} candidate={candidate} openModal={openModal} />
           ))}
-          
         </div>
         <div className="px-12 items-center flex justify-between mb-3">
-          <p>Total Votes : 12345</p>
           <Countdown targetDate="2025-05-01T00:00:00" />
         </div>
       </div>
@@ -106,15 +104,15 @@ export default function VoteCard() {
 function CandidateCard({ candidate, openModal }: { candidate: Candidate; openModal: (candidate: Candidate) => void }) {
   return (
     <>   
-      <div className=" h-full w-96 text-center flex flex-col flex-wrap">
-        <div className="bg-[#E64848] rounded-tr-lg rounded-tl-lg flex justify-between p-7 z-6 py-4 text-white">
+      <div className=" w-96 text-center flex flex-col flex-wrap">
+        <div className="bg-[#E64848] rounded-tr-lg rounded-tl-lg flex justify-between p-7 py-4 text-white">
           <div className="flex justify-between">
             <svg xmlns="http://www.w3.org/2000/svg" width={26} height={26} viewBox="0 0 24 24" className="text-[#f7cccc] "><path fill="currentColor" d="M12 5.9a2.1 2.1 0 1 1 0 4.2a2.1 2.1 0 0 1 0-4.2m0 9c2.97 0 6.1 1.46 6.1 2.1v1.1H5.9V17c0-.64 3.13-2.1 6.1-2.1M12 4C9.79 4 8 5.79 8 8s1.79 4 4 4s4-1.79 4-4s-1.79-4-4-4m0 9c-2.67 0-8 1.34-8 4v3h16v-3c0-2.66-5.33-4-8-4"></path></svg>
             <h1 className="text-xl font-semibold  font-sans text-white pl-3 ">{candidate.name}</h1>
           </div>
           <span className="text-[18px] font-thin text-white">{candidate.divisi}</span>
         </div>
-        <div className=" text-center flex-wrap flex-col justify-center ">
+        <div className=" text-center flex-wrap  justify-center ">
             <Image src={candidate.image || "/pino.png"} alt={candidate.name} width={300} height={300} className="w-full mb-9 rounded-br-lg rounded-bl-lg" />
               <div className="relative">
                  <div className="absolute bg-white cursor-pointer border hover:rotate-180  duration-300 ease-in-out border-black/25 p-2 rounded-full -top-24 right-2 ">
@@ -125,7 +123,7 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
                  </div>
               </div>
         </div>
-          <div className="mt-32 items-center py-3 ">
+          <div className=" items-center pt-34 ">
             <button
               onClick={() => openModal(candidate)}
               className="rounded-lg hover:bg-white  hover:text-black duration-300 border right-1/4 bg-red-800 w-full py-2 text-white cursor-pointer"

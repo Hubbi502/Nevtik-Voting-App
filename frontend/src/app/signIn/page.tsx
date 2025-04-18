@@ -45,8 +45,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className='bg-gradient-to-b from-red-800 to-red-400 flex items-center justify-center h-screen my-auto '>
-      <div>
+    <div className='bg-gradient-to-b from-red-800 to-red-400 lg:mx-0 sm:px-12 flex items-center justify-center h-screen my-auto '>
+      <div className='hidden sm:block '>
         <Image
           src={"assets/banner.svg"}
           alt='banner'
@@ -54,7 +54,7 @@ export default function SignIn() {
           height={100}
         />
       </div>
-      <div className='w-135 bg-white h-142 rounded-tr-4xl rounded-br-4xl justify-center items-center'>
+      <div className='w-full sm:w-135 bg-white h-auto sm:h-142 rounded-4xl  lg:rounded-tr-4xl lg:rounded-br-4xl lg:rounded-tl-none lg:rounded-bl-none p-4 flex flex-col justify-center items-center mx-4 sm:mx-12'>
         <div className='mt-6 flex items-center justify-center'>
           <Image
             src={"/assets/nevtik1.svg"}
@@ -65,11 +65,11 @@ export default function SignIn() {
         </div>
         <div className='text-center'>
           <div className={jersey10.className}>
-            <h1 className='text-7xl text-red-800 jersey'>Pemilu Nevtik</h1>
+            <h1 className='text-4xl sm:text-7xl text-red-800 jersey'>Pemilu Nevtik</h1>
           </div>
-          <p className='text-red-800 text-xl'>Sign In</p>
+          <p className='text-red-800 text-lg sm:text-xl'>Sign In</p>
         </div>
-        <div className='mt-10 sm:mx-auto sm:w-150 sm:max-w-sm'>
+        <div className='mt-10 w-full sm:mx-auto sm:w-150 sm:max-w-sm'>
           <form onSubmit={handleSubmit} className='space-y-6'>
             {error && (
               <div className='p-3 text-sm text-red-600 bg-red-100 rounded-md'>
@@ -124,7 +124,7 @@ export default function SignIn() {
             <div>
               <button
                 type='submit'
-                className='flex my-15 w-full justify-center rounded-md bg-red-800 py-5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
+                className='flex my-15 w-full justify-center rounded-md bg-red-800 py-5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
               >
                 Sign in
               </button>

@@ -26,8 +26,10 @@ export default function SignIn() {
       if (response.message === "success") {
         if(response.data.email === "admin@nevtik.com"){
           router.push("/Admin/AdminTable");
+          console.log(response)
         }else{
           router.push("/Voting-Page");
+          console.log(response)
         }
       } else {
         setError(response.message);

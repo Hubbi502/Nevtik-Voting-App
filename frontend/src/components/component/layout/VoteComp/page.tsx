@@ -24,6 +24,7 @@ export default function VoteCard() {
     jurusan: candidate.jurusan,
     href: `/Voting-Page/candidates?page=${index+1}`,
   }));
+  console.log(candidatesRaw);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCandidate, setSelectedCandidate] = useState<Candidate | null>(null);
 
@@ -43,6 +44,7 @@ export default function VoteCard() {
       const response = await voteApi.castVote(selectedCandidate.id);
       if(!response.success) {
         alert("Gagal melakukan vote");
+        console.log(response)
         return;
       }
       window.location.href = "/end"; // Adjust the route based on your setup
@@ -112,7 +114,7 @@ function CandidateCard({ candidate, openModal }: { candidate: Candidate; openMod
           </div>
           <span className="text-[18px] font-thin text-white">{candidate.divisi}</span>
         </div>
-        <div className=" text-center flex-wrap  justify-center ">
+        <div className=" text-center flex-wrap flex-col justify-center ">
             <Image src={candidate.image || "/pino.png"} alt={candidate.name} width={300} height={300} className="w-full mb-9 rounded-br-lg rounded-bl-lg" />
               <div className="relative">
                  <div className="absolute bg-white cursor-pointer border hover:rotate-180  duration-300 ease-in-out border-black/25 p-2 rounded-full -top-24 right-2 ">

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Menu } from "lucide-react";
+import { Jersey_10 } from "next/font/google";
 import {
   Pagination,
   PaginationContent,
@@ -10,6 +11,11 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+
+const jersey10 = Jersey_10({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 interface User {
   id: string;
@@ -81,6 +87,11 @@ export default function AdminTable() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const USERS_PER_PAGE = 6;
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleModalToggle = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   const fetchUsers = async (page: number) => {
     try {
@@ -138,6 +149,22 @@ export default function AdminTable() {
             <div className="flex justify-between ml-12 mt-9">
                 <DropdownButton title="Status" items={["Vote", "Not Vote"]}  />
                 <DropdownButton title="Filter" items={["ITNSA", "Web Developer", "Cyber Security"]} />
+                <a
+                  onClick={handleModalToggle}
+                  className="rounded-full p-2 hover:bg-black hover:text-white duration-300 ease-in mx-4 bg-white cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={30}
+                    height={30}
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M8 9a3 3 0 1 0 0-6a3 3 0 0 0 0 6m0 2a6 6 0 0 1 6 6H2a6 6 0 0 1 6-6m8-4a1 1 0 1 0-2 0v1h-1a1 1 0 1 0 0 2h1v1a1 1 0 1 0 2 0v-1h1a1 1 0 1 0 0-2h-1z"
+                    ></path>
+                  </svg>
+                </a>
             </div>
             </div>
           </div>
@@ -217,6 +244,86 @@ export default function AdminTable() {
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black/25 bg-opacity-50 z-50">
+          <div className="bg-[#FFFDE3] p-6 rounded-lg shadow-lg w-1/3">
+            <div className="relative mb-12">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-0 cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width={40}
+                  height={40}
+                  viewBox="0 0 512 512"
+                >
+                  <path
+                    fill="currentColor"
+                    fillRule="evenodd"
+                    d="M420.48 121.813L390.187 91.52L256 225.92L121.813 91.52L91.52 121.813L225.92 256L91.52 390.187l30.293 30.293L256 286.08l134.187 134.4l30.293-30.293L286.08 256z"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+            <div className={jersey10.className}>
+              <h2 className="text-6xl tracking-wide mb-4 text-center">Create Account</h2>
+            </div>
+            <form className="px-12 py-4">
+            <div>
+              <label
+                htmlFor='email'
+                className='block text-lg mb-2 font-medium text-gray-900'
+              >
+                Email
+              </label>
+              <div className='mt-2'>
+                <input
+                  id='email'
+                  name='email'
+                  type='email'
+                  autoComplete='email'
+                  placeholder='Enter Email'
+                  required
+                  
+                  className='block w-full rounded-md px-3 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600'
+                />
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label
+                htmlFor='password'
+                className='block text-lg font-medium text-gray-900'
+              >
+                Password
+              </label>
+              <div className='mt-2'>
+                <input
+                  id='password'
+                  name='password'
+                  type='password'
+                  autoComplete='current-password'
+                  placeholder='********'
+                  required
+                  className='block w-full rounded-md px-3 py-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600'
+                />
+              </div>
+            </div>
+
+            <div>
+              <button
+                type='submit'
+                className='flex my-7 w-full justify-center rounded-md bg-red-800 py-5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600'
+              >
+                Create
+              </button>
+            </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -31,7 +31,7 @@ export default function CongratsPage() {
     fetchWinner();
   }, []);
 
-  if (!winner) return <div className="text-center mt-20">Loading...</div>;
+  if (!winner) return <div className="text-center pt-[32rem] bg-[#F8F2DE] h-screen">Loading...</div>;
 
   return (
     <>
@@ -39,19 +39,20 @@ export default function CongratsPage() {
       {/* ... biarkan SVG-nya tetap seperti di kode lu ... */}
 
       {/* Header */}
-      <div className=" absolute left-[53rem] top-25">
-        <div className="flex items-center text-center flex-col">
-          <img src="/logo-rmv.png" alt="" width={60} height={60} />
-          <div className="flex mt-2 flex-col text-center">
-            <span className={`text-5xl font-bold ${roboto.className}`}>
-              SELAMAT
-            </span>
-            <span className={`text-2xl font-light ${playfairDisplay.className}`}>
-              Atas Terpilihnya
-            </span>
+      <div className="bg-[#F8F2DE]">
+        <div className=" absolute left-[53rem] top-25">
+          <div className="flex items-center text-center flex-col">
+            <img src="/logo-rmv.png" alt="" width={60} height={60} />
+            <div className="flex mt-2 flex-col text-center">
+              <span className={`text-5xl font-bold ${roboto.className}`}>
+                SELAMAT
+              </span>
+              <span className={`text-2xl font-light ${playfairDisplay.className}`}>
+                Atas Terpilihnya
+              </span>
+            </div>
           </div>
         </div>
-      </div>
 
       {/* Background dan Nama Kandidat */}
       <div className="flex justify-center items-center w-full bg-[#F8F2DE] h-screen">
@@ -110,6 +111,7 @@ export default function CongratsPage() {
             <a href="/" className="text-xl font-mono">Kembali</a>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

@@ -48,11 +48,11 @@ const CandidatesPage = () => {
   }
 
   return (
-    <div className='h-screen'>
+    <div className='h-screen  bg-orange-50'>
       <Suspense fallback={<div>Loading...</div>}>
         <SearchParamsWrapper setCurrentPage={setCurrentPage} />
       </Suspense>
-      <div className='flex mt-12 items-center gap-30 justify-center '>
+      <div className='flex pt-24 items-center gap-30 justify-center '>
         <div>
           <BiodataCard
             name={currentCandidate.name}

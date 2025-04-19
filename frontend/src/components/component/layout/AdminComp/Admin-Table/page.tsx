@@ -12,6 +12,11 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 
+const jersey10 = Jersey_10({
+  weight: "400",
+  subsets: ["latin"],
+});
+
 interface User {
   id: string;
   name: string;

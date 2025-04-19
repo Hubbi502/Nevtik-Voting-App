@@ -47,8 +47,8 @@ export default function SignIn() {
   };
 
   return (
-    <div className='bg-gradient-to-b from-red-800 to-red-400 lg:mx-0 sm:px-12 flex items-center justify-center h-screen my-auto '>
-      <div className='hidden sm:block '>
+    <div className='bg-gradient-to-b from-red-800 to-red-400 lg:mx-0 sm:px-12 flex justify-center h-screen my-auto '>
+      <div className='hidden sm:block my-48.75'>
         <Image
           src={"assets/banner.svg"}
           alt='banner'
@@ -56,7 +56,7 @@ export default function SignIn() {
           height={100}
         />
       </div>
-      <div className='w-full sm:w-135 bg-white h-auto sm:h-142 rounded-4xl  lg:rounded-tr-4xl lg:rounded-br-4xl lg:rounded-tl-none lg:rounded-bl-none p-4 flex flex-col justify-center items-center mx-4 sm:mx-12'>
+      <div className='w-full my-auto sm:w-135 bg-white h-auto sm:h-143 rounded-4xl  lg:rounded-tr-4xl lg:rounded-br-4xl lg:rounded-tl-none lg:rounded-bl-none p-4 flex flex-col justify-center items-center mx-4 sm:mx-12'>
         <div className='mt-6 flex items-center justify-center'>
           <Image
             src={"/assets/nevtik1.svg"}
